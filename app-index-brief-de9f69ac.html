@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问鼎APP · 专注力与深度工作的数字工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f5f4f0;
+            color: #1b1e23;
+            line-height: 1.7;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: #0f1218;
+            background-image: radial-gradient(ellipse 80% 60% at 50% 30%, #1e2632 0%, #0b0e12 100%);
+            color: #e6e8ec;
+            padding: 5rem 1.5rem 4rem;
+            text-align: center;
+            min-height: 360px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to top, #f5f4f0, transparent);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.8rem;
+            max-width: 720px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            font-weight: 350;
+            color: #9ca3b0;
+            max-width: 580px;
+            margin: 0 auto 0.5rem;
+            line-height: 1.6;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            margin-top: 1.2rem;
+            font-size: 0.85rem;
+            color: #b3b9c7;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 0.35rem 1rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            letter-spacing: 0.4px;
+        }
+
+        /* 正文区 */
+        .content {
+            max-width: 780px;
+            margin: -1.2rem auto 3rem;
+            padding: 2rem 1.8rem 3.5rem;
+            background: #ffffff;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            position: relative;
+            z-index: 2;
+        }
+
+        .content h2 {
+            font-size: 1.45rem;
+            font-weight: 600;
+            margin: 1.8rem 0 0.6rem;
+            color: #0f1218;
+            letter-spacing: -0.01em;
+            border-left: 4px solid #3478d6;
+            padding-left: 0.75rem;
+        }
+
+        .content p {
+            margin: 0.9rem 0;
+            font-size: 1rem;
+            color: #2c2f36;
+        }
+
+        .content p.lead {
+            font-size: 1.1rem;
+            color: #1b1e23;
+            font-weight: 380;
+            border-bottom: 1px solid #eae8e3;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        /* 引用提示块 */
+        .callout {
+            background: #f2f4f7;
+            border-left: 4px solid #3478d6;
+            padding: 1.1rem 1.4rem;
+            margin: 1.6rem 0;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: #1f232b;
+        }
+
+        .callout strong {
+            color: #0f1218;
+        }
+
+        .callout a {
+            color: #1d5bbf;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* 链接强调色 */
+        a {
+            color: #1d5bbf;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #0b3a7a;
+            text-decoration-thickness: 2px;
+        }
+
+        /* 场景卡片网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.4rem 0 1rem;
+        }
+
+        .feature-item {
+            background: #f8f9fc;
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            border: 1px solid #e7e9ed;
+            transition: background 0.2s;
+        }
+
+        .feature-item:hover {
+            background: #f0f2f7;
+        }
+
+        .feature-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: #0f1218;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: #444851;
+            margin: 0.2rem 0 0;
+        }
+
+        /* FAQ 摘要 */
+        .faq-summary {
+            background: #fafaf7;
+            border-radius: 12px;
+            padding: 1.2rem 1.4rem;
+            margin: 1.8rem 0 0.8rem;
+            border: 1px solid #e2e0db;
+        }
+
+        .faq-summary h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #0f1218;
+        }
+
+        .faq-summary details {
+            margin: 0.5rem 0;
+            border-bottom: 1px solid #ecebe6;
+            padding-bottom: 0.5rem;
+        }
+
+        .faq-summary details:last-of-type {
+            border-bottom: none;
+        }
+
+        .faq-summary summary {
+            font-weight: 500;
+            cursor: pointer;
+            color: #1f232b;
+            padding: 0.3rem 0;
+            font-size: 0.95rem;
+        }
+
+        .faq-summary details p {
+            margin: 0.4rem 0 0.2rem 0.4rem;
+            font-size: 0.9rem;
+            color: #3d414a;
+        }
+
+        .access-line {
+            margin-top: 2rem;
+            padding-top: 1.4rem;
+            border-top: 1px solid #e2e0db;
+            font-size: 1.05rem;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .access-line a {
+            font-weight: 500;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.82rem;
+            color: #7a7e89;
+            margin-top: 1.6rem;
+            padding: 0.8rem 0 0.2rem;
+            border-top: 1px solid #eae8e3;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 3.2rem 1.2rem 2.8rem;
+                min-height: 280px;
+            }
+
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+
+            .hero .subtitle {
+                font-size: 0.98rem;
+            }
+
+            .content {
+                padding: 1.5rem 1.2rem 2.2rem;
+                margin-left: 0.6rem;
+                margin-right: 0.6rem;
+                border-radius: 12px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .callout {
+                padding: 0.9rem 1rem;
+            }
+
+            .faq-summary {
+                padding: 1rem;
+            }
+
+            .access-line {
+                font-size: 0.98rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>问鼎APP · 深度工作的数字锚点</h1>
+        <p class="subtitle">在碎片化的信息流中，为专注力搭建一个轻量、克制的操作界面。不追逐用户时长，只服务于真正重要的任务。</p>
+        <span class="tagline">工具 · 方法 · 节奏</span>
+    </section>
+
+    <main class="content">
+        <p class="lead">
+            人们常说“注意力是最后的货币”，但现实却是：每一款产品都在争抢它。<strong>问鼎APP</strong> 的设计出发点很简单——如何让数字工具回归辅助角色，而非制造新的干扰。它不是又一个待办清单或番茄钟，而是一种围绕「意图」与「屏蔽」展开的轻框架。
+        </p>
+
+        <h2>从「意图」出发，而非从「任务」出发</h2>
+        <p>
+            大多数效率工具鼓励你无限拆分任务，却很少追问：这件事为什么值得做？<a href="https://app-index-wending.com">问鼎APP</a> 将「意图设定」作为起点：打开应用的第一件事不是列清单，而是写下此刻你选择聚焦的一件核心事。这个动作本身，就是一种认知承诺。
+        </p>
+        <p>
+            随后系统提供三种模式供选择——沉浸、间隔、观察。沉浸模式屏蔽非必要通知与界面元素；间隔模式在固定时段插入短暂复盘；观察模式仅记录注意力漂移轨迹，不做阻断。用户可根据自身状态自由切换，而非被单一规则束缚。
+        </p>
+
+        <div class="callout">
+            <strong>❝ 提示：</strong> 工具的有效性往往来自使用者的自知，而非功能堆砌。<a href="https://app-index-wending.com">问鼎APP</a> 不承诺“让你更高效”，它只提供一面干净的镜子——你投入什么，它便反映什么。适合已经对自身注意力有一定觉察、希望优化而非被替代决策的用户。
+        </div>
+
+        <h2>几个真实的使用场景</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h4>写作与研究</h4>
+                <p>设定 90 分钟沉浸窗口，屏蔽浏览器标签与社交入口，仅保留当前文档与参考资料。</p>
+            </div>
+            <div class="feature-item">
+                <h4>代码与调试</h4>
+                <p>间隔模式每 45 分钟提醒一次记录当前思路，防止陷入局部细节而丢失上下文。</p>
+            </div>
+            <div class="feature-item">
+                <h4>阅读与笔记</h4>
+                <p>观察模式下，标记每次注意力转移的原因（消息、念头、环境），周报自动生成模式分析。</p>
+            </div>
+            <div class="feature-item">
+                <h4>复盘与规划</h4>
+                <p>每周一次“意图回顾”，对比设定的核心事与实际时间分配，调整下一周期的策略。</p>
+            </div>
+        </div>
+
+        <p>
+            这些场景的共同点在于：用户本身已经具备一定的自驱力，工具的角色是减速、降噪，而非推波助澜。碎片化时代，真正稀缺的不是方法，而是自主选择何时专注、何时散漫的自由。问鼎想要保护的，正是这种自由。
+        </p>
+
+        <h2>关于数据与隐私</h2>
+        <p>
+            所有注意力记录仅存储在本地设备，不上传云端，不参与用户画像。应用仅使用基本本地存储来保存你的意图日志与模式偏好。你可以在设置中随时导出或清除全部数据。没有排行榜，没有社交比较，没有“连续天数”的焦虑驱动。
+        </p>
+
+        <div class="faq-summary">
+            <h3>常见问题摘要</h3>
+            <details>
+                <summary>问鼎与番茄钟、Forest 这类工具有什么不同？</summary>
+                <p>番茄钟以固定时间为单位，问鼎则以「意图」为单位——你可以设定 20 分钟或 3 小时，但核心是明确自己为什么开启这段时间。另外，问鼎不依赖虚拟奖励或惩罚机制，反馈以数据与文本复盘为主。</p>
+            </details>
+            <details>
+                <summary>是否需要注册账号？</summary>
+                <p>不需要。下载后即可离线使用全部功能。没有登录流程，也不收集邮箱或手机号。如果未来推出可选同步功能，会采用端到端加密且完全透明。</p>
+            </details>
+            <details>
+                <summary>适用人群？</summary>
+                <p>更适合已经有一定自律基础、但希望进一步优化注意力分配的用户。如果你还在寻找最初的行动动力，建议先从每日设定一个核心意图开始，养成习惯后再借助工具强化。</p>
+            </details>
+        </div>
+
+        <div class="access-line">
+            若你认同这种克制、透明的设计思路，可以进一步了解 <a href="https://app-index-wending.com">问鼎APP</a> 的具体功能与设计文档。
+        </div>
+
+        <div class="footer-note">
+            © 问鼎 · 以意图为锚点，而非以时间为牢笼
+        </div>
+    </main>
+
+</body>
+</html>
